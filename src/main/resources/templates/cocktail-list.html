@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Contemporary Classic Cocktails</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-$END$
-</body>
-</html>
+<h1>Contemporary Classic Cocktails</h1>
+
+<form action="/cocktails/search" method="get">
+    <label for="ingredient">Search by ingredient:</label>
+    <input type="text" id="ingredient" name="ingredient" placeholder="Enter ingredient"
+           th:value="${ingredient != null} ? ${ingredient} : ''">
+    <button type="submit">Search</button>
+</form>
+
+<p>
+    The Contemporary IBA Classic cocktails have more modern origins, & include more sparkling cocktails & long drinks than the Unforgettable Cocktails.
+    <br>Here is a list of the IBA Contemporary Classic Cocktails:
+</p>
+
+
+<ul>
+    <li th:each="cocktail : ${cocktails}">
+        <a th:href="@{'cocktail?name=' + ${cocktail.getName()}}" th:text="${cocktail.getName()}"></a>
+    </li>
+</ul>
